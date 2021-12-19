@@ -4,7 +4,9 @@ import "./styles.css";
 export default class ControlContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      value: 0
+    };
   }
 
   render() {
@@ -17,7 +19,13 @@ export default class ControlContainer extends Component {
           min="0"
           step="1"
           max="100"
-          onChange={(e) => this.props.handleChange(e)}
+          value={this.state.value}
+          onChange={(e) => {
+            // set current value in state so ir can be reflected on input itself
+            // and send it to other components
+            this.setState({ value: e.target.value });
+            this.props.handleChange(e);
+          }}
         />
       </div>
     );
